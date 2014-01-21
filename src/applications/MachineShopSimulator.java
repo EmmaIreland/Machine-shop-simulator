@@ -158,17 +158,7 @@ public class MachineShopSimulator {
                                                     // state
             lastJob = null;
             // wait over, ready for new job
-            if (machine[theMachine].jobQ.isEmpty()) // no waiting job
-                eList.setFinishTime(theMachine, largeTime);
-            else {// take job off the queue and work on it
-                machine[theMachine].activeJob = (Job) machine[theMachine].jobQ
-                        .remove();
-                machine[theMachine].totalWait += timeNow
-                        - machine[theMachine].activeJob.arrivalTime;
-                machine[theMachine].numTasks++;
-                int t = machine[theMachine].activeJob.removeNextTask();
-                eList.setFinishTime(theMachine, timeNow + t);
-            }
+            nextJob(theMachine);
         } else {// task has just finished on machine[theMachine]
                 // schedule change-over time
             lastJob = machine[theMachine].activeJob;
@@ -178,6 +168,20 @@ public class MachineShopSimulator {
         }
 
         return lastJob;
+    }
+
+    private static void nextJob(int theMachine) {
+        if (machine[theMachine].jobQ.isEmpty()) // no waiting job
+            eList.setFinishTime(theMachine, largeTime);
+        else {// take job off the queue and work on it
+            machine[theMachine].activeJob = (Job) machine[theMachine].jobQ
+                    .remove();
+            machine[theMachine].totalWait += timeNow
+                    - machine[theMachine].activeJob.arrivalTime;
+            machine[theMachine].numTasks++;
+            int t = machine[theMachine].activeJob.removeNextTask();
+            eList.setFinishTime(theMachine, timeNow + t);
+        }
     }
 
     /** input machine shop data */
@@ -207,6 +211,10 @@ public class MachineShopSimulator {
         }
 
         // input the jobs
+        inputJobs(keyboard);
+    }
+
+    private static void inputJobs(MyInputStream keyboard) {
         Job theJob;
         for (int i = 1; i <= numJobs; i++) {
             System.out.println("Enter number of tasks for job " + i);
