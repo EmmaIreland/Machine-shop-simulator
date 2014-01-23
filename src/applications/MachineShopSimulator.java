@@ -14,19 +14,6 @@ public class MachineShopSimulator {
     public static final String EACH_JOB_AT_LEAST_1_TASK = "each job must have >= 1 task";
     public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
     
-    // top-level nested classes
-    private static class Task {
-        // data members
-        private int machine;
-        private int singleTime;
-
-        // constructor
-        private Task(int theMachine, int theTime) {
-            machine = theMachine;
-            singleTime = theTime;
-        }
-    }
-
     private static class Job {
         // data members
         private LinkedQueue taskQ; // this job's tasks
@@ -50,7 +37,7 @@ public class MachineShopSimulator {
          * remove next task of job and return its time also update length
          */
         private int removeNextTask() {
-            int theTime = ((Task) taskQ.remove()).singleTime;
+            int theTime = ((Task) taskQ.remove()).getTime();
             taskTimes += theTime;
             return theTime;
         }
@@ -134,7 +121,7 @@ public class MachineShopSimulator {
             return false;
         } else {// theJob has a next task
                 // get machine for next task
-            int p = ((Task) currentJob.taskQ.getFrontElement()).machine;
+            int p = ((Task) currentJob.taskQ.getFrontElement()).getMachine();
             // put on machine p's wait queue
             machine[p].jobQ.put(currentJob);
             currentJob.arrivalTime = timeNow;
