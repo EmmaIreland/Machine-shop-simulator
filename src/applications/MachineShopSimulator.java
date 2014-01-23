@@ -54,31 +54,33 @@ public class MachineShopSimulator {
     static Job changeState(int theMachine) {// Task on theMachine has finished,
                                             // schedule next one.
         Job lastJob;
-        if (machine[theMachine].getActiveJob() == null) {// in idle or change-over
+        Machine currentMachine = machine[theMachine];
+        if (currentMachine.getActiveJob() == null) {// in idle or change-over
                                                     // state
             lastJob = null;
             // wait over, ready for new job
             nextJob(theMachine);
         } else {// task has just finished on machine[theMachine]
                 // schedule change-over time
-            lastJob = machine[theMachine].getActiveJob();
-            machine[theMachine].setActiveJob(null);
+            lastJob = currentMachine.getActiveJob();
+            currentMachine.setActiveJob(null);
             eList.setFinishTime(theMachine, timeNow
-                    + machine[theMachine].getChangeTime());
+                    + currentMachine.getChangeTime());
         }
 
         return lastJob;
     }
 
     private static void nextJob(int theMachine) {
-        if (machine[theMachine].getJobQ().isEmpty()) // no waiting job
+        Machine currentMachine = machine[theMachine];
+        if (currentMachine.getJobQ().isEmpty()) // no waiting job
             eList.setFinishTime(theMachine, largeTime);
         else {// take job off the queue and work on it
-            machine[theMachine].setActiveJob((Job) machine[theMachine].getJobQ()
+            currentMachine.setActiveJob((Job) currentMachine.getJobQ()
                     .remove());
-            machine[theMachine].setTotalWait(machine[theMachine].getTotalWait() + timeNow - machine[theMachine].getActiveJob().getArrivalTime());
-            machine[theMachine].setNumTasks(machine[theMachine].getNumTasks() +1);
-            int t = machine[theMachine].getActiveJob().removeNextTask();
+            currentMachine.setTotalWait(currentMachine.getTotalWait() + timeNow - currentMachine.getActiveJob().getArrivalTime());
+            currentMachine.setNumTasks(currentMachine.getNumTasks() +1);
+            int t = currentMachine.getActiveJob().removeNextTask();
             eList.setFinishTime(theMachine, timeNow + t);
         }
     }
