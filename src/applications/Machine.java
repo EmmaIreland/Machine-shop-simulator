@@ -15,8 +15,17 @@ class Machine {
         jobQ = new LinkedQueue();
     }
     
+    @Deprecated
     public LinkedQueue getJobQ(){
         return jobQ;
+    }
+    
+    public boolean hasNoActiveJob() {
+        return jobQ.isEmpty();
+    }
+    
+    public Job removeJob() {
+        return (Job) this.jobQ.remove();
     }
     
     public int getChangeTime(){

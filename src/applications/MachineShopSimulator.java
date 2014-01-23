@@ -27,7 +27,7 @@ public class MachineShopSimulator {
      * 
      * @return false iff no next task
      */
-    static boolean moveToNextMachine(Job currentJob) {
+    private static boolean moveToNextMachine(Job currentJob) {
         if (currentJob.getTaskQ().isEmpty()) {// no next task
             System.out.println("Job " + currentJob.getJobId() + " has completed at "
                     + timeNow + " Total wait was " + (timeNow - currentJob.getTaskTimes()));
@@ -51,7 +51,7 @@ public class MachineShopSimulator {
      * 
      * @return last job run on this machine
      */
-    static Job changeState(int theMachine) {// Task on theMachine has finished,
+    private static Job changeState(int theMachine) {// Task on theMachine has finished,
                                             // schedule next one.
         Job lastJob;
         Machine currentMachine = machine[theMachine];
@@ -73,11 +73,10 @@ public class MachineShopSimulator {
 
     private static void nextJob(int theMachine) {
         Machine currentMachine = machine[theMachine];
-        if (currentMachine.getJobQ().isEmpty()) // no waiting job
+        if (currentMachine.hasNoActiveJob()) // no waiting job
             eList.setFinishTime(theMachine, largeTime);
         else {// take job off the queue and work on it
-            currentMachine.setActiveJob((Job) currentMachine.getJobQ()
-                    .remove());
+            currentMachine.setActiveJob(currentMachine.removeJob());
             currentMachine.setTotalWait(currentMachine.getTotalWait() + timeNow - currentMachine.getActiveJob().getArrivalTime());
             currentMachine.setNumTasks(currentMachine.getNumTasks() +1);
             int t = currentMachine.getActiveJob().removeNextTask();
@@ -85,8 +84,12 @@ public class MachineShopSimulator {
         }
     }
 
+
+
+
+
     /** input machine shop data */
-    static void inputData() {
+    private static void inputData() {
         // define the input stream to be the standard input stream
         MyInputStream keyboard = new MyInputStream();
 
@@ -143,13 +146,13 @@ public class MachineShopSimulator {
     }
 
     /** load first jobs onto each machine */
-    static void startShop() {
+    private static void startShop() {
         for (int p = 1; p <= numMachines; p++)
             changeState(p);
     }
 
     /** process all jobs to completion */
-    static void simulate() {
+    private static void simulate() {
         while (numJobs > 0) {// at least one job left
             int nextToFinish = eList.nextEventMachine();
             timeNow = eList.nextEventTime(nextToFinish);
@@ -163,7 +166,7 @@ public class MachineShopSimulator {
     }
 
     /** output wait times at machines */
-    static void outputStatistics() {
+    private static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
         for (int p = 1; p <= numMachines; p++) {
             System.out.println("Machine " + p + " completed "
