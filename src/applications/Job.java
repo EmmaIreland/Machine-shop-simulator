@@ -49,9 +49,9 @@ class Job {
                 + timeNow + " Total wait was " + totalWait(timeNow));
     }
     
-    @Deprecated
-    public LinkedQueue getTaskQ(){
-        return taskQ;
+    
+    public Task jobFirstTask() {
+        return (Task) taskQ.getFrontElement();
     }
     
     public boolean taskIsEmpty() {
