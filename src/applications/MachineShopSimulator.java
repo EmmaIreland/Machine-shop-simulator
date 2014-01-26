@@ -160,7 +160,7 @@ public class MachineShopSimulator {
         }
     }
 
-    /** output wait times for machines */
+    /** output wait times at machines */
     private static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
         for (int p = 1; p <= numMachines; p++) {
