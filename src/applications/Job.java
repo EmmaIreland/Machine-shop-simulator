@@ -30,10 +30,6 @@ class Job {
         return theTime;
     }
     
-    @Deprecated
-    public int getTaskTimes(){
-        return taskTimes;
-    }
     
     public int totalWait(int timeNow) {
         return timeNow - taskTimes;
@@ -47,8 +43,10 @@ class Job {
         arrivalTime = time;
     }
     
-    public int getJobId(){
-        return jobId;
+    
+    public void isEmptyPrint(int timeNow) {
+        System.out.println("Job " + jobId + " has completed at "
+                + timeNow + " Total wait was " + totalWait(timeNow));
     }
     
     public LinkedQueue getTaskQ(){
