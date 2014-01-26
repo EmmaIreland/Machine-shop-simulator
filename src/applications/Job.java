@@ -50,8 +50,8 @@ class Job {
     }
     
     
-    public Task jobFirstTask() {
-        return (Task) taskQ.getFrontElement();
+    public int jobFirstTask() {
+        return ((Task) taskQ.getFrontElement()).getMachine();
     }
     
     public boolean taskIsEmpty() {

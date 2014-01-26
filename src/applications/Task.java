@@ -16,6 +16,7 @@ public class Task {
         return machine;
     }
     
+   
     public int getTime(){
         return singleTime;
     }

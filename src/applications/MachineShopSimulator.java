@@ -33,7 +33,7 @@ public class MachineShopSimulator {
             return false;
         } else {// theJob has a next task
                 // get machine for next task
-            int p = currentJob.jobFirstTask().getMachine();
+            int p = currentJob.jobFirstTask();
             // put on machine p's wait queue
             machine[p].addJob(currentJob);
             currentJob.setArrivalTime(timeNow);
@@ -44,6 +44,13 @@ public class MachineShopSimulator {
             return true;
         }
     }
+
+
+
+
+//    private static int machineNextTask(Job currentJob) {
+//        return currentJob.jobFirstTask().getMachine();
+//    }
 
 
 
