@@ -28,6 +28,10 @@ class Machine {
         return (Job) this.jobQ.remove();
     }
     
+    public void addJob(Job currentJob) {
+        this.jobQ.put(currentJob);
+    }
+    
     public int getChangeTime(){
         return changeTime;
     }
