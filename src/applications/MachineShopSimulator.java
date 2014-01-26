@@ -33,13 +33,13 @@ public class MachineShopSimulator {
             return false;
         } else {// theJob has a next task
                 // get machine for next task
-            int p = currentJob.jobFirstTask();
+            int machineIndex = currentJob.jobFirstTask();
             // put on machine p's wait queue
-            machine[p].addJob(currentJob);
+            machine[machineIndex].addJob(currentJob);
             currentJob.setArrivalTime(timeNow);
             // if p idle, schedule immediately
-            if (eList.nextEventTime(p) == largeTime) {// machine is idle
-                changeState(p);
+            if (eList.nextEventTime(machineIndex) == largeTime) {// machine is idle
+                changeState(machineIndex);
             }
             return true;
         }
