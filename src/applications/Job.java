@@ -49,7 +49,12 @@ class Job {
                 + timeNow + " Total wait was " + totalWait(timeNow));
     }
     
+    @Deprecated
     public LinkedQueue getTaskQ(){
         return taskQ;
+    }
+    
+    public boolean taskIsEmpty() {
+        return taskQ.isEmpty();
     }
 }

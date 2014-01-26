@@ -28,7 +28,7 @@ public class MachineShopSimulator {
      * @return false iff no next task
      */
     private static boolean moveToNextMachine(Job currentJob) {
-        if (currentJob.getTaskQ().isEmpty()) {// no next task
+        if (currentJob.taskIsEmpty()) {// no next task
             currentJob.isEmptyPrint(timeNow);
             return false;
         } else {// theJob has a next task
@@ -44,12 +44,6 @@ public class MachineShopSimulator {
             return true;
         }
     }
-
-
-
-
-
-
 
 
 
