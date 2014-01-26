@@ -15,10 +15,6 @@ class Machine {
         jobQ = new LinkedQueue();
     }
     
-    @Deprecated
-    public LinkedQueue getJobQ(){
-        return jobQ;
-    }
     
     public boolean hasNoActiveJob() {
         return jobQ.isEmpty();
@@ -32,8 +28,9 @@ class Machine {
         this.jobQ.put(currentJob);
     }
     
-    public int getChangeTime(){
-        return changeTime;
+    
+    public int machineTime(int timeNow) {
+        return timeNow + changeTime;
     }
     
     public void setChangeTime(int time){

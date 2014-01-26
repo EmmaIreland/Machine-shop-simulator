@@ -66,26 +66,28 @@ public class MachineShopSimulator {
                 // schedule change-over time
             lastJob = currentMachine.getActiveJob();
             currentMachine.setActiveJob(null);
-            eList.setFinishTime(theMachine, timeNow
-                    + currentMachine.getChangeTime());
+            eList.machineEventTime(theMachine, currentMachine, timeNow);
         }
 
         return lastJob;
     }
 
+
+
+
+
     private static void nextJob(int theMachine) {
         Machine currentMachine = machine[theMachine];
-        if (currentMachine.hasNoActiveJob()) // no waiting job
-            eList.setFinishTime(theMachine, largeTime);
+        if (currentMachine.hasNoActiveJob())
+            eList.eventFinishTime(theMachine, largeTime);
         else {// take job off the queue and work on it
             currentMachine.setActiveJob(currentMachine.removeJob());
             currentMachine.setTotalWait(currentMachine.getTotalWait() + timeNow - currentMachine.getActiveJob().getArrivalTime());
             currentMachine.setNumTasks(currentMachine.getNumTasks() +1);
             int t = currentMachine.getActiveJob().removeNextTask();
-            eList.setFinishTime(theMachine, timeNow + t);
+            eList.eventFinishTime(theMachine, timeNow + t);
         }
     }
-
 
 
 

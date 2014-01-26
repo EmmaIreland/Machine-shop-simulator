@@ -38,7 +38,18 @@ public class EventList {
         return finishTime[theMachine];
     }
 
+    @Deprecated
     void setFinishTime(int theMachine, int theTime) {
         finishTime[theMachine] = theTime;
     }
+    
+    public void eventFinishTime(int theMachine, int time) {
+        this.finishTime[theMachine] = time; 
+    }
+    
+    public void machineEventTime(int theMachine, Machine currentMachine, int timeNow) {
+        this.finishTime[theMachine] = currentMachine.machineTime(timeNow);
+    }
+
+
 }
