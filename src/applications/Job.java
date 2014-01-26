@@ -30,8 +30,13 @@ class Job {
         return theTime;
     }
     
+    @Deprecated
     public int getTaskTimes(){
         return taskTimes;
+    }
+    
+    public int totalWait(int timeNow) {
+        return timeNow - taskTimes;
     }
     
     public int getArrivalTime() {

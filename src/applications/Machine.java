@@ -37,6 +37,7 @@ class Machine {
         changeTime = time;
     }
     
+    
     public int getTotalWait(){
         return totalWait;
     }
