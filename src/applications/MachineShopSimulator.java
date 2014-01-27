@@ -52,13 +52,13 @@ public class MachineShopSimulator {
     private static Job changeState(int theMachine) {// Task on theMachine has finished, schedule next one.
         Job lastJob;
         Machine currentMachine = machine[theMachine];
-        if (currentMachine.getActiveJob() == null) {// in idle or change-over state
+        if (currentMachine.isJobNull()) {// in idle or change-over state
             lastJob = null;
             // the wait is over, ready for new job
             nextJob(theMachine);
         } else {// task has just finished on currentMachine, schedule change-over time
             lastJob = currentMachine.getActiveJob();
-            currentMachine.setActiveJob(null);
+            currentMachine.setToNull();
             eList.machineEventTime(theMachine, currentMachine, timeNow);
         }
 

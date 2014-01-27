@@ -58,8 +58,16 @@ class Machine {
         return activeJob;
     }
     
+    public boolean isJobNull() {
+        return activeJob == null;
+    }
+    
     public void setActiveJob(Job job){
         activeJob = job;
+    }
+    
+    public void setToNull() {
+        activeJob = null;
     }
 
     public int advanceJob(int timeNow) {
