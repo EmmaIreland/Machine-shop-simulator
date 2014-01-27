@@ -61,4 +61,12 @@ class Machine {
     public void setActiveJob(Job job){
         activeJob = job;
     }
+
+    public int advanceJob(int timeNow) {
+        activeJob = (Job) this.jobQ.remove();
+        totalWait = totalWait + timeNow - activeJob.getArrivalTime();
+        numTasks = numTasks +1;
+        int time = activeJob.removeNextTask();
+        return time;
+    }
 }

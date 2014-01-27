@@ -72,14 +72,10 @@ public class MachineShopSimulator {
         if (currentMachine.hasNoActiveJob())
             eList.eventFinishTime(theMachine, largeTime);
         else {// take job off the queue and work on it
-            currentMachine.setActiveJob(currentMachine.removeJob());
-            currentMachine.setTotalWait(currentMachine.getTotalWait() + timeNow - currentMachine.getActiveJob().getArrivalTime());
-            currentMachine.setNumTasks(currentMachine.getNumTasks() +1);
-            int time = currentMachine.getActiveJob().removeNextTask();
+            int time = currentMachine.advanceJob(timeNow);
             eList.eventFinishTime(theMachine, timeNow + time);
         }
     }
-
 
 
 
