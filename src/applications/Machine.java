@@ -77,4 +77,10 @@ class Machine {
         int time = activeJob.removeNextTask();
         return time;
     }
+    
+    public void machineResults(int p) {
+        System.out.println("Machine " + p + " completed " + numTasks + " tasks");
+        System.out.println("The total wait time was " + totalWait);
+        System.out.println();
+    }
 }
