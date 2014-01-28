@@ -38,32 +38,12 @@ class Machine {
     }
     
     
-    public int getTotalWait(){
-        return totalWait;
-    }
-    
-    public void setTotalWait(int wait){
-        totalWait = wait;
-    }
-    
-    public int getNumTasks(){
-        return numTasks;
-    }
-    
-    public void setNumTasks(int tasks){
-        numTasks = tasks;
-    }
-    
     public Job getActiveJob(){
         return activeJob;
     }
     
     public boolean isJobNull() {
         return activeJob == null;
-    }
-    
-    public void setActiveJob(Job job){
-        activeJob = job;
     }
     
     public void setToNull() {
