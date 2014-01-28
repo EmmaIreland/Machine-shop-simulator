@@ -3,14 +3,12 @@ package applications;
 import dataStructures.LinkedQueue;
 
 class Machine {
-    // data members
-    private LinkedQueue jobQ; // queue of waiting jobs for this machine
+    private LinkedQueue jobQ;
     private int changeTime; // machine change-over time
     private int totalWait; // total delay at this machine
-    private int numTasks; // number of tasks processed on this machine
-    private Job activeJob; // job currently active on this machine
+    private int numTasks;
+    private Job activeJob;
 
-    // constructor
     Machine() {
         jobQ = new LinkedQueue();
     }
@@ -51,10 +49,10 @@ class Machine {
     }
 
     public int advanceJob(int timeNow) {
-        activeJob = (Job) this.jobQ.remove();
-        totalWait = totalWait + timeNow - activeJob.getArrivalTime();
+        activeJob = (Job) this.jobQ.remove(); // Remove activeJob from jobQ and start working on it.
+        totalWait = totalWait + timeNow - activeJob.getArrivalTime(); // Calculate current activeJob's total wait time.
         numTasks = numTasks +1;
-        int time = activeJob.removeNextTask();
+        int time = activeJob.removeNextTask(); // Current activeJob's task time.
         return time;
     }
     
