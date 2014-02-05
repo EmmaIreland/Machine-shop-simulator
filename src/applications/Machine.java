@@ -57,7 +57,7 @@ class Machine {
     }
     
     public void machineResults(int p) {
-        System.out.println("Machine " + p + " completed " + numTasks + " tasks");
+        System.out.println("Machine " + (p + 1) + " completed " + numTasks + " tasks");
         System.out.println("The total wait time was " + totalWait);
         System.out.println();
     }

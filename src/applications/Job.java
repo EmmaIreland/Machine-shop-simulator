@@ -41,7 +41,7 @@ class Job {
     
     
     public void isEmptyPrint(int timeNow) {
-        System.out.println("Job " + jobId + " has completed at "
+        System.out.println("Job " + (jobId + 1) + " has completed at "
                 + timeNow + " Total wait was " + totalWait(timeNow));
     }
     

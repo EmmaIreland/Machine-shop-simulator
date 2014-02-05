@@ -92,12 +92,12 @@ public class MachineShopSimulator {
 
         // create event and machine queues
         eList = new EventList(numMachines, largeTime);
-        machine = new Machine[numMachines+1];
+        machine = new Machine[numMachines];
             
 
         // input the change-over times
         System.out.println("Enter change-over times for machines");
-        for (int j = 1; j <= numMachines; j++) {
+        for (int j = 0; j < numMachines; j++) {
             machine[j] = new Machine();
             int changeOverTime = keyboard.readInteger();
             if (changeOverTime < 0)
@@ -111,8 +111,8 @@ public class MachineShopSimulator {
 
     private static void inputJobs(MyInputStream keyboard) {
         Job theJob;
-        for (int i = 1; i <= numJobs; i++) {
-            System.out.println("Enter number of tasks for job " + i);
+        for (int i = 0; i < numJobs; i++) {
+            System.out.println("Enter number of tasks for job " + (i+1));
             int tasks = keyboard.readInteger(); // number of tasks
             int firstMachine = 0; // machine for first task
             if (tasks < 1)
@@ -122,13 +122,13 @@ public class MachineShopSimulator {
             theJob = new Job(i);
             System.out.println("Enter the tasks (machine, time)"
                     + " in process order");
-            for (int j = 1; j <= tasks; j++) {// get tasks for job i
-                int theMachine = keyboard.readInteger();
+            for (int j = 0; j < tasks; j++) {// get tasks for job i
+                int theMachine = keyboard.readInteger() - 1;
                 int theTaskTime = keyboard.readInteger();
-                if (theMachine < 1 || theMachine > numMachines
+                if (theMachine < 0 || theMachine >= numMachines
                         || theTaskTime < 1)
                     throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
-                if (j == 1)
+                if (j == 0)
                     firstMachine = theMachine; // job's first machine
                 theJob.addTask(theMachine, theTaskTime); // add to task queue
             }
@@ -138,7 +138,7 @@ public class MachineShopSimulator {
 
     /** load first jobs onto each machine */
     private static void startShop() {
-        for (int p = 1; p <= numMachines; p++)
+        for (int p = 0; p < numMachines; p++)
             changeState(p);
     }
 
@@ -159,7 +159,7 @@ public class MachineShopSimulator {
     /** output wait times at machines */
     private static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
-        for (int p = 1; p <= numMachines; p++) {
+        for (int p = 0; p < numMachines; p++) {
             machine[p].machineResults(p);
         }
     }
