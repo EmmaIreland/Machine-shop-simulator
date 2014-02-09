@@ -5,7 +5,7 @@ public class EventList {
 
     EventList(int machines, int largestTime) {// initialize finish times for all machines
         if (machines < 1)
-            throw new IllegalArgumentException(MachineShopSimulator.NUMBER_OF_MACHINES_AT_LEAST_1);
+            throw new IllegalArgumentException("number of machines must be >= 1");
         finishTime = new int[machines];
 
         // all machines are idle, initialize with largest time
