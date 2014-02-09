@@ -27,7 +27,7 @@ public class MachineShopSimulator {
      */
     private static boolean moveToNextMachine(Job currentJob) {
         if (currentJob.taskIsEmpty()) {
-            currentJob.isEmptyPrint(timeNow);
+            Print.isEmptyPrint(timeNow, currentJob);
             return false;
         }
         // get machine for next task
@@ -112,7 +112,7 @@ public class MachineShopSimulator {
     private static void inputJobs(MyInputStream keyboard) {
         Job theJob;
         for (int i = 0; i < numJobs; i++) {
-            System.out.println("Enter number of tasks for job " + (i+1));
+            Print.numTasksForJob(i);
             int tasks = keyboard.readInteger(); // number of tasks
             int firstMachine = 0; // machine for first task
             if (tasks < 1)
@@ -135,6 +135,11 @@ public class MachineShopSimulator {
             machine[firstMachine].addJob(theJob);
         }
     }
+
+
+
+
+
 
     /** load first jobs onto each machine */
     private static void startShop() {
@@ -160,7 +165,7 @@ public class MachineShopSimulator {
     private static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
         for (int p = 0; p < numMachines; p++) {
-            machine[p].machineResults(p);
+            Print.machineResults(p, machine[p]);
         }
     }
 

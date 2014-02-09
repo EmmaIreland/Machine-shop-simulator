@@ -40,18 +40,16 @@ class Job {
     }
     
     
-    public void isEmptyPrint(int timeNow) {
-        System.out.println("Job " + (jobId + 1) + " has completed at "
-                + timeNow + " Total wait was " + totalWait(timeNow));
-    }
-    
-    
     public int jobFirstTask() {
         return ((Task) taskQ.getFrontElement()).getMachine();
     }
     
     public boolean taskIsEmpty() {
         return taskQ.isEmpty();
+    }
+    
+    public int getJobId(){
+        return jobId;
     }
     
     
